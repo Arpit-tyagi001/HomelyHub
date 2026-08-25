@@ -63,9 +63,24 @@ enum:["Wifi", "Kitchen", "wahing machine", "TV", "pool", "Free parking", "AC", "
             area: String,
             PINcode: Number, 
           },
-          //will add this in future
+         
           currentBookings:[
-
+          {
+            bookingId:{
+              type: mongoose.Schema.Types.ObjectId,
+              ref:"Booking"
+            },
+            fromDate:{
+              type:Date
+            },
+            toDate:{
+              type:Date
+            },
+            UserId:{
+              type:mongoose.Schema.Types.ObjectId,
+              ref:"User"
+            }
+          }
           ],
           userID:{
             type: mongoose.Schema.Types.ObjectId,
