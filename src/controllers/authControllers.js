@@ -47,7 +47,7 @@ createSendToken(user,200,res)
   }
 
 // protect
-  const protect(req,res,next)=>{
+const protect = async(req,res,next)=>{
 try {
 //step 1:  finding the token
 
@@ -76,7 +76,7 @@ token = req.cookies.jwt;
 
   //step4: token is real but still exist??
 
-  const currenUser = await User.findById(decoded.id);
+  const currentUser = await User.findById(decoded.id);
   if(!currentUser){
     throw new Error("the user belonging to the token does not exist")
   };

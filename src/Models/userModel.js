@@ -94,7 +94,7 @@ userSchema.methods.correctPassword = async function(candidatePassword, userPassw
 }
 
 //
-userSchema.methods.changePasswordAfter = function(JWTTimestamp){
+userSchema.methods.changedPasswordAfter = function(JWTTimestamp){
   if(this.passwordChangedAt){
     const changedTimestamp = parseInt(this.passwordChangedAt.getTime()/1000, 10);
     return JWTTimestamp < changedTimestamp;;
