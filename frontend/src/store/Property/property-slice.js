@@ -39,4 +39,4 @@ const propertySlice = createSlice({
 })
 
 export const propertyAction = propertySlice.actions
-export default propertySlice;
+export default propertySlice.reducer;
