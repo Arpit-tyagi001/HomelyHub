@@ -1,53 +1,58 @@
 # 🏠 HomelyHub
 
-**HomelyHub** is a full-stack real-estate marketplace built with the **MERN stack** that enables users to discover, list, and manage properties available for rent or sale.
+> **A full-stack real-estate marketplace built with the MERN stack for discovering, listing, and managing properties for rent or sale.**
 
-The application provides secure JWT-based authentication, property CRUD operations, advanced search and filtering, image uploads, and email notifications through a RESTful backend API.
+HomelyHub is a **full-stack real-estate marketplace** that allows users to create accounts, browse property listings, search and filter properties, upload property images, and manage their own listings.
+
+The application follows a **client-server architecture**, with a React-based frontend communicating with a RESTful Express.js backend backed by MongoDB.
 
 ---
 
 ## ✨ Features
 
-### 🔐 Authentication & Security
+### 🔐 Authentication & Authorization
 
 * User registration and login
 * JWT-based authentication
-* Secure password hashing using `bcryptjs`
+* Secure password hashing with `bcryptjs`
 * Protected property management routes
 * Token-based authorization
+* User-specific property management
 
 ### 🏘️ Property Management
 
 * Create property listings
-* View all available properties
-* View individual property details
+* Browse available properties
+* View detailed property information
 * Update existing listings
 * Delete property listings
 * Support for properties available for **rent or sale**
 
-### 🔍 Search & Filtering
+### 🔎 Search & Filtering
 
 * Search properties by location
-* Filter by price
+* Filter properties by price
 * Filter by property type
-* Additional API-based filtering and querying
+* API-based querying and filtering
+* Dynamic property listing results
 
-### 📸 Image Management
+### 🖼️ Image Management
 
-* Property image uploads
-* Image hosting using **ImageKit**
-* Support for displaying property images in listings
+* Upload property images
+* Image hosting and delivery through **ImageKit**
+* Display property images throughout the application
 
-### 📧 Email Notifications
+### 📧 Email Integration
 
 * Email functionality using **Nodemailer**
-* Automated communication through the backend
+* Backend-based email communication
 
-### 📱 Responsive UI
+### 📱 Responsive Frontend
 
-* Responsive React-based interface
+* Responsive React UI
 * Client-side routing with React Router
-* API communication using Axios
+* REST API integration using Axios
+* Reusable React components
 
 ---
 
@@ -55,47 +60,57 @@ The application provides secure JWT-based authentication, property CRUD operatio
 
 ### Frontend
 
-* **React.js**
-* **React Router**
-* **Axios**
-* **Tailwind CSS / CSS**
+| Technology             | Purpose             |
+| ---------------------- | ------------------- |
+| **React.js**           | Frontend UI         |
+| **React Router**       | Client-side routing |
+| **Axios**              | API communication   |
+| **Tailwind CSS / CSS** | Styling             |
 
 ### Backend
 
-* **Node.js**
-* **Express.js**
-* **MongoDB**
-* **Mongoose**
-* **JWT**
-* **bcryptjs**
-* **Nodemailer**
-* **ImageKit**
+| Technology     | Purpose                    |
+| -------------- | -------------------------- |
+| **Node.js**    | Backend runtime            |
+| **Express.js** | REST API framework         |
+| **MongoDB**    | Database                   |
+| **Mongoose**   | MongoDB ODM                |
+| **JWT**        | Authentication             |
+| **bcryptjs**   | Password hashing           |
+| **Nodemailer** | Email communication        |
+| **ImageKit**   | Image storage and delivery |
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Application Architecture
 
 ```text
-                    ┌─────────────────────┐
-                    │     React.js UI     │
-                    │  React Router       │
-                    │  Axios              │
-                    └──────────┬──────────┘
-                               │
-                               │ HTTP / REST API
-                               ▼
-                    ┌─────────────────────┐
-                    │    Express.js       │
-                    │      Backend        │
-                    └──────────┬──────────┘
-                               │
-             ┌─────────────────┼─────────────────┐
-             │                 │                 │
-             ▼                 ▼                 ▼
-       ┌───────────┐     ┌───────────┐    ┌───────────┐
-       │ MongoDB   │     │ ImageKit  │    │ Nodemailer│
-       │ Database  │     │  Images   │    │   Emails  │
-       └───────────┘     └───────────┘    └───────────┘
+                         ┌──────────────────────┐
+                         │      React.js        │
+                         │    Frontend UI       │
+                         │                      │
+                         │ React Router + Axios │
+                         └──────────┬───────────┘
+                                    │
+                                    │ HTTP / REST API
+                                    ▼
+                         ┌──────────────────────┐
+                         │     Express.js       │
+                         │      Backend         │
+                         │                      │
+                         │ Routes / Controllers │
+                         │ Authentication       │
+                         └──────────┬───────────┘
+                                    │
+                  ┌─────────────────┼─────────────────┐
+                  │                 │                 │
+                  ▼                 ▼                 ▼
+          ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+          │   MongoDB    │  │   ImageKit   │  │  Nodemailer  │
+          │              │  │              │  │              │
+          │ Users        │  │ Property     │  │ Email        │
+          │ Properties   │  │ Images       │  │ Services     │
+          └──────────────┘  └──────────────┘  └──────────────┘
 ```
 
 ---
@@ -139,27 +154,45 @@ HomelyHub/
 
 ---
 
-## ⚙️ Installation & Setup
+## 🚀 Getting Started
 
-### 1. Clone the Repository
+### Prerequisites
+
+Make sure you have the following installed:
+
+* **Node.js**
+* **npm**
+* **MongoDB** or a MongoDB Atlas database
+* **ImageKit** account
+* An email service/account for Nodemailer
+
+---
+
+## 📥 Installation
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Arpit-tyagi001/HomelyHub.git
 cd HomelyHub
 ```
 
-### 2. Backend Setup
+### 2. Install backend dependencies
 
 ```bash
 cd backend
 npm install
 ```
 
+### 3. Configure environment variables
+
 Create a `.env` file inside the `backend/` directory:
 
 ```env
 PORT=8080
+
 MONGO_URI=your_mongodb_connection_string
+
 JWT_SECRET=your_jwt_secret_key
 JWT_EXPIRES_IN=7d
 
@@ -171,95 +204,184 @@ EMAIL_USER=your_email
 EMAIL_PASS=your_email_app_password
 ```
 
-Start the backend:
+> ⚠️ **Never commit your `.env` file or expose your API keys, database credentials, JWT secret, or email credentials.**
+
+### 4. Start the backend
 
 ```bash
 npm run dev
 ```
 
-### 3. Frontend Setup
+The backend will start on the configured port.
 
-Open another terminal:
+### 5. Install frontend dependencies
+
+Open a new terminal:
 
 ```bash
 cd frontend
 npm install
+```
+
+### 6. Start the frontend
+
+```bash
 npm run dev
 ```
 
-The frontend will then be available through the Vite development server.
+The frontend will be available through the Vite development server.
 
 ---
 
 ## 🔌 API Endpoints
 
-| Method   | Endpoint                     | Description                        |
-| -------- | ---------------------------- | ---------------------------------- |
-| `POST`   | `/api/v1/rent/user/register` | Register a new user                |
-| `POST`   | `/api/v1/rent/user/login`    | Authenticate user and generate JWT |
-| `GET`    | `/api/v1/rent/listing`       | Retrieve property listings         |
-| `POST`   | `/api/v1/rent/listing`       | Create a property listing          |
-| `GET`    | `/api/v1/rent/listing/:id`   | Retrieve a specific property       |
-| `PATCH`  | `/api/v1/rent/listing/:id`   | Update a property listing          |
-| `DELETE` | `/api/v1/rent/listing/:id`   | Delete a property listing          |
+### Authentication
 
-> **Note:** Verify the endpoint paths against the finalized backend routes before publishing the README.
+| Method | Endpoint                     | Description                        |
+| ------ | ---------------------------- | ---------------------------------- |
+| `POST` | `/api/v1/rent/user/register` | Register a new user                |
+| `POST` | `/api/v1/rent/user/login`    | Authenticate user and generate JWT |
+
+### Properties
+
+| Method   | Endpoint                   | Description                  |
+| -------- | -------------------------- | ---------------------------- |
+| `GET`    | `/api/v1/rent/listing`     | Retrieve property listings   |
+| `POST`   | `/api/v1/rent/listing`     | Create a property listing    |
+| `GET`    | `/api/v1/rent/listing/:id` | Retrieve a specific property |
+| `PATCH`  | `/api/v1/rent/listing/:id` | Update a property listing    |
+| `DELETE` | `/api/v1/rent/listing/:id` | Delete a property listing    |
+
+> **Note:** Endpoint paths should be verified against the current backend route configuration before publishing this section.
 
 ---
 
 ## 🔑 Authentication Flow
 
 ```text
-User
- │
- │ Register / Login
- ▼
-Express API
- │
- ├── Validate credentials
- │
- ├── Hash / verify password
- │
- └── Generate JWT
-        │
-        ▼
-      Client
-        │
-        │ JWT
-        ▼
-Protected API Routes
-        │
-        ▼
-   MongoDB Operations
+                 ┌──────────────┐
+                 │     User     │
+                 └──────┬───────┘
+                        │
+                  Register / Login
+                        │
+                        ▼
+                ┌───────────────┐
+                │  Express API  │
+                └───────┬───────┘
+                        │
+              ┌─────────┴─────────┐
+              │                   │
+        Validate User       Verify Password
+              │                   │
+              └─────────┬─────────┘
+                        │
+                    Generate JWT
+                        │
+                        ▼
+                ┌───────────────┐
+                │    Client     │
+                └───────┬───────┘
+                        │
+                    JWT Token
+                        │
+                        ▼
+              Protected API Routes
+                        │
+                        ▼
+                   MongoDB
 ```
 
 ---
 
-## 🧠 Key Implementation Highlights
+## 🧠 Technical Highlights
 
-* Implemented a **RESTful API** using Express.js.
-* Used **MongoDB + Mongoose** for persistent property and user data.
-* Implemented **JWT authentication and authorization** for protected routes.
-* Used **bcryptjs** for secure password hashing.
-* Integrated **ImageKit** for property image storage and delivery.
-* Implemented reusable API filtering functionality using `APIFeatures.js`.
-* Integrated **Nodemailer** for email communication.
-* Built a responsive frontend using **React.js**.
-* Connected the frontend and backend through REST APIs using **Axios**.
+### RESTful Backend
+
+Designed and implemented a REST API using **Node.js and Express.js** for user authentication and property management.
+
+### JWT Authentication
+
+Implemented token-based authentication to protect private property management operations.
+
+### Secure Password Handling
+
+Used `bcryptjs` to hash user passwords before storing them in the database.
+
+### MongoDB Data Layer
+
+Used **MongoDB with Mongoose** for persistent storage of user and property information.
+
+### Image Uploads
+
+Integrated **ImageKit** to handle property image storage and delivery.
+
+### API Filtering
+
+Implemented reusable API filtering and querying functionality through `APIFeatures.js`.
+
+### Email Integration
+
+Integrated **Nodemailer** for backend email communication.
+
+### React Frontend
+
+Built the client interface using React with reusable components and React Router for navigation.
+
+### Frontend–Backend Integration
+
+Connected the React frontend to the Express REST API using **Axios**.
 
 ---
 
-## 🚀 Future Enhancements
+## 🔄 Application Flow
 
-* 💳 Payment gateway integration for property booking/rental
-* 🛡️ Admin dashboard for managing users and listings
+```text
+User
+ │
+ ├── Register / Login
+ │
+ ▼
+JWT Authentication
+ │
+ ▼
+Browse Properties
+ │
+ ├── Search
+ ├── Filter
+ └── View Details
+ │
+ ▼
+Authenticated User
+ │
+ ├── Create Listing
+ ├── Update Listing
+ └── Delete Listing
+ │
+ ▼
+Express REST API
+ │
+ ├── MongoDB
+ ├── ImageKit
+ └── Nodemailer
+```
+
+---
+
+## 🔮 Future Enhancements
+
+The following features are planned for future versions:
+
+* 💳 Property booking and payment integration
+* 🛡️ Admin dashboard
 * ⭐ Property reviews and ratings
-* 🗺️ Map-based property search using Google Maps API
-* ❤️ Wishlist / saved properties
+* 🗺️ Map-based property discovery
+* ❤️ Wishlist and saved properties
 * 🔔 Real-time notifications
-* 💬 Buyer–seller messaging system
-* 📊 Analytics dashboard for property owners
-* ☁️ Production deployment with CI/CD
+* 💬 Buyer–seller messaging
+* 📊 Property-owner analytics dashboard
+* ☁️ Production deployment
+* 🔄 Automated CI/CD pipeline
 
 ---
 
@@ -267,10 +389,13 @@ Protected API Routes
 
 ### Arpit Tyagi
 
-Computer Science Engineering Student & Full-Stack Developer
+**Computer Science Engineering Student | Full-Stack Developer**
 
-**GitHub:**
-https://github.com/Arpit-tyagi001
+I build full-stack web applications with a focus on **React, Node.js, Express, MongoDB, Python, and AI-powered applications**.
+
+### Connect
+
+* **GitHub:** [Arpit-tyagi001](https://github.com/Arpit-tyagi001)
 
 ---
 
