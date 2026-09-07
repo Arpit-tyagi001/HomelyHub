@@ -1,5 +1,5 @@
 import {propertyAction} from "./property-slice";
-import {axiosInstance} from "../../utils/axios";
+import { axiosInstance } from "../../utils/axios";
 
 //get all properties
 // 1. start api req
@@ -20,11 +20,11 @@ console.log("API call started");
 
 dispatch(propertyAction.getRequest())
 
-const {SearchParams} = getState().properties
-console.log(SearchParams);
+const {searchParams} = getState().properties
+console.log(searchParams);
 
 const response = await axiosInstance.get(`/v1/rent/listing`, {
-  params:{...SearchParams}
+  params:{...searchParams}
 })
 
 if(!response){

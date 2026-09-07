@@ -1,5 +1,5 @@
 import {propertyDetailsAction} from "./propertyDetails-slice";
-import {axiosInstance} from "../../utils/axios";
+import {axiosInstance} from "../../../utils/axios";
 
 //fetch details of one specific property using p-id
 //recev p-id
